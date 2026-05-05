@@ -1,0 +1,322 @@
+/* Gruvbox Dark Palette - GTK Compatible */
+@define-color bg0 #282828;
+@define-color bg1 #3c3836;
+@define-color fg0 #fbf1c7;
+@define-color red #fb4934;
+@define-color green #b8bb26;
+@define-color yellow #fabd2f;
+@define-color blue #83a598;
+@define-color purple #d3869b;
+@define-color aqua #8ec07c;
+@define-color orange #fe8019;
+@define-color gray #a89984;
+@define-color bg-dark #282828;
+@define-color bg-light #3c3836;
+@define-color fg #fbf1c7;
+
+* {
+    font-family: "JetBrainsMono Nerd Font", "Roboto";
+    font-size: 12px;
+    border: none;
+    border-radius: 0;
+    min-height: 0;
+}
+
+window#waybar {
+    background-color: rgba(40, 40, 40, 0.9);
+    border-radius: 12px;
+    color: @fg0;
+    border: 2px solid @bg1;
+    animation-name: fade-slide-in, border-rainbow, oled-shift, bg-shift;
+    animation-duration: 0.6s, 10s, 600s, 20s;
+    animation-iteration-count: 1, infinite, infinite, infinite;
+    animation-timing-function: ease-out, linear, ease-in-out, ease-in-out;
+    padding-top: 2px;
+    padding-bottom: 2px;
+}
+
+@keyframes border-rainbow {
+    0% {
+        border-color: @red;
+    }
+
+    33% {
+        border-color: @aqua;
+    }
+
+    66% {
+        border-color: @yellow;
+    }
+
+    100% {
+        border-color: @red;
+    }
+}
+
+/* Window title (center) - gentle glow */
+#window {
+    font-family: "Noto Sans";
+    font-size: 18px;
+    font-weight: bold;
+    color: @fg0;
+    text-shadow: 0 0 8px rgba(250, 189, 47, 0.4);
+    animation: breathe 5s ease-in-out infinite;
+}
+
+/* Clock - time */
+#clock.time {
+    color: @yellow;
+    font-weight: bold;
+    animation: breathe 4s ease-in-out infinite;
+}
+
+/* Clock - calendar/date */
+#clock.calendar {
+    color: @orange;
+}
+
+#workspaces button {
+    color: @gray;
+}
+
+#workspaces button.active {
+    color: @orange;
+    background-color: @bg1;
+    border-bottom: 3px solid @orange;
+    animation: slide-underline 0.3s ease-out;
+}
+
+/* CPU & Memory - aqua, transitions to orange/red at high usage */
+#cpu {
+    color: @aqua;
+    transition: color 0.5s ease;
+}
+
+#memory {
+    color: @aqua;
+    transition: color 0.5s ease;
+}
+
+/* Temperature */
+#temperature {
+    color: @gray;
+    transition: color 0.5s ease;
+}
+
+#temperature.critical {
+    color: @red;
+}
+
+#pulseaudio {
+    color: @blue;
+}
+
+#network {
+    color: @aqua;
+}
+
+#battery {
+    color: @green;
+}
+
+#battery.charging, #battery.plugged, #battery.full {
+    color: @yellow;
+}
+
+#battery.warning {
+    color: @orange;
+}
+
+#battery.critical {
+    color: @red;
+}
+
+#custom-notification {
+    color: @purple;
+    padding-right: 15px;
+}
+
+#tray {
+    margin-right: 10px;
+}
+
+#workspaces button, #battery, #network {
+    transition: all 0.3s cubic-bezier(.55,-0.68,.48,1.68);
+}
+
+/* Update this section in your style/style.css */
+#clock.time,
+#clock.calendar,
+#workspaces,
+#cpu,
+#temperature,
+#memory,
+#pulseaudio,
+#network,
+#battery,
+#custom-notification {
+    padding: 0 6px;
+    margin: 0 4px;
+}
+
+
+/* Pulse glow on power button */
+@keyframes pulse-glow {
+    from {
+        text-shadow: 0 0 4px rgba(251, 73, 52, 0.3);
+    }
+    50% {
+        text-shadow: 0 0 12px rgba(251, 73, 52, 0.8);
+    }
+    to {
+        text-shadow: 0 0 4px rgba(251, 73, 52, 0.3);
+    }
+}
+
+/* Breathing effect for clock & window title */
+@keyframes breathe {
+    from {
+        opacity: 1;
+    }
+    50% {
+        opacity: 0.6;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+/* Fade-in on bar load */
+@keyframes fade-slide-in {
+    from {
+        opacity: 0;
+        margin-top: -20px;
+    }
+    to {
+        opacity: 1;
+        margin-top: 10px;
+    }
+}
+
+/* Workspace active indicator slide */
+@keyframes slide-underline {
+    from {
+        border-bottom-color: transparent;
+    }
+    to {
+        border-bottom-color: @orange;
+    }
+}
+
+/* OLED burn-in protection: shifts entire bar by 1-2px over 10min cycle */
+@keyframes oled-shift {
+    0%   { margin-top: 10px; margin-left: 15px; margin-right: 15px; }
+    16%  { margin-top: 11px; margin-left: 16px; margin-right: 14px; }
+    33%  { margin-top: 12px; margin-left: 15px; margin-right: 15px; }
+    50%  { margin-top: 11px; margin-left: 14px; margin-right: 16px; }
+    66%  { margin-top: 10px; margin-left: 15px; margin-right: 15px; }
+    83%  { margin-top: 11px; margin-left: 16px; margin-right: 14px; }
+    100% { margin-top: 10px; margin-left: 15px; margin-right: 15px; }
+}
+
+#bluetooth {
+    color: @blue; /* Gruvbox Blue */
+    padding: 0 10px;
+}
+
+#bluetooth.connected {
+    color: @aqua; /* Changes to Aqua when a device is paired */
+}
+
+#bluetooth.discoverable {
+    color: @orange; /* Highlights when you're in pairing mode */
+}
+
+#custom-weather {
+    color: @orange;
+}
+
+/* Subtle color shift on hover - no size changes */
+#custom-weather:hover,
+#cpu:hover,
+#memory:hover,
+#temperature:hover,
+#pulseaudio:hover,
+#network:hover,
+#battery:hover,
+#clock.time:hover,
+#clock.calendar:hover {
+    color: @fg0;
+    transition: color 0.3s ease;
+}
+
+/* Tooltip styling */
+tooltip {
+    background-color: @bg0;
+    border: 2px solid @bg1;
+    border-radius: 10px;
+    padding: 8px 12px;
+    color: @fg0;
+    font-family: "JetBrainsMono Nerd Font";
+    font-size: 12px;
+}
+
+tooltip label {
+    color: @fg0;
+}
+
+#custom-moon {
+    font-size: 14px;
+    padding: 0 6px;
+    margin: 0 4px;
+}
+
+#custom-location {
+    padding: 0 6px;
+    margin: 0 4px;
+}
+
+#custom-location.on {
+    color: @green;
+}
+
+#custom-location.off {
+    color: @gray;
+}
+
+#custom-location:hover {
+    color: @fg0;
+    transition: color 0.3s ease;
+}
+
+#custom-screenshot {
+    color: @blue;
+    padding: 0 6px;
+    margin: 0 4px;
+}
+
+#custom-screenshot:hover {
+    color: @fg0;
+    transition: color 0.3s ease;
+}
+
+#custom-power {
+    color: @red;
+    padding: 0 10px;
+    margin: 4px;
+    animation: pulse-glow 2s ease-in-out infinite;
+}
+
+#custom-power:hover {
+    color: @orange;
+}
+
+/* Subtle background color shift through dark Gruvbox tones */
+@keyframes bg-shift {
+    0%   { background-color: rgba(40, 40, 40, 0.9); }
+    20%  { background-color: rgba(40, 36, 34, 0.9); }
+    40%  { background-color: rgba(34, 40, 38, 0.9); }
+    60%  { background-color: rgba(36, 36, 42, 0.9); }
+    80%  { background-color: rgba(42, 36, 36, 0.9); }
+    100% { background-color: rgba(40, 40, 40, 0.9); }
+}

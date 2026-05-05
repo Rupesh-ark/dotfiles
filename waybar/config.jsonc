@@ -1,0 +1,195 @@
+{
+    "layer": "top",
+    "output": "",
+    "position": "top",
+    "mod": "dock",
+    "exclusive": true,
+    "passthrough": false,
+    "gtk-layer-shell": true,
+    "height": 40,
+    "margin-top": 10,
+    "margin-left": 15,
+    "margin-right": 15,
+    "modules-left": [
+        "custom/power",
+        "hyprland/workspaces",
+        "cpu",
+        "temperature",
+        "memory",
+        "custom/weather",
+        "custom/moon"
+    ],
+    "modules-center": [
+        "hyprland/window"
+    ],
+    "modules-right": [
+        "tray",
+        "pulseaudio",
+        "network",
+        "battery",
+        "clock#time",
+        "clock#calendar",
+        "custom/screenshot",
+        "custom/location",
+        "custom/notification"
+    ],
+    "hyprland/workspaces": {
+        "disable-scroll": true,
+        "all-outputs": true,
+        "on-click": "activate",
+        "format": "{name}",
+        "persistent-workspaces": {
+            "*": 5
+        }
+    },
+    "hyprland/window": {
+        "format": "{title}",
+        "max-length": 50,
+        "icon": true,
+        "icon-size": 16,
+        "rewrite": {
+            "(.*) .* Mozilla Firefox": "$1",
+            "(.*) - Visual Studio Code": "$1",
+            "(.*) - Discord": "$1"
+        }
+    },
+    "clock#time": {
+        "format": "\uf017  {:%H:%M}",
+        "tooltip-format": "{:%A, %B %d %Y}"
+    },
+    "clock#calendar": {
+        "format": "  {:%a, %b %d}",
+        "tooltip-format": "<big><b>{:%B %Y}</b></big>\n<tt>{calendar}</tt>",
+        "calendar": {
+            "mode": "month",
+            "mode-mon-col": 3,
+            "weeks-pos": "left",
+            "on-scroll": 1,
+            "format": {
+                "months": "<span color='#fabd2f'><b>{}</b></span>",
+                "days": "<span color='#ebdbb2'>{}</span>",
+                "weeks": "<span color='#8ec07c'>W{}</span>",
+                "weekdays": "<span color='#fe8019'><b>{}</b></span>",
+                "today": "<span color='#fb4934'><b><u>{}</u></b></span>"
+            }
+        }
+    },
+    "cpu": {
+        "interval": 2,
+        "format": "{icon}  {usage}%",
+        "format-icons": ["▁", "▂", "▃", "▄", "▅", "▆", "▇", "█"],
+        "max-length": 10,
+        "tooltip": true,
+        "tooltip-format": "CPU: {usage}%\n{avg_frequency} GHz"
+    },
+    "temperature": {
+        "interval": 5,
+        "critical-threshold": 80,
+        "format": "{icon} {temperatureC}\u00b0",
+        "format-critical": "\uf2c7 {temperatureC}\u00b0",
+        "format-icons": ["\uf2cb", "\uf2c9", "\uf2c7"],
+        "tooltip-format": "{temperatureC}\u00b0C / {temperatureF}\u00b0F"
+    },
+    "memory": {
+        "interval": 5,
+        "format": "{icon}  {percentage}%",
+        "format-icons": ["▁", "▂", "▃", "▄", "▅", "▆", "▇", "█"],
+        "max-length": 10,
+        "tooltip": true,
+        "tooltip-format": "RAM: {used:0.1f}G / {total:0.1f}G\nSwap: {swapUsed:0.1f}G / {swapTotal:0.1f}G"
+    },
+    "pulseaudio": {
+        "format": "{icon} {volume}%",
+        "format-muted": "",
+        "format-icons": {
+            "default": ["", "", ""]
+        },
+        "on-click": "pavucontrol"
+    },
+    "network": {
+        "format-wifi": "  {essid}",
+        "format-ethernet": "  {ipaddr}",
+        "format-linked": "  {ifname} (No IP)",
+        "format-disconnected": "  Disconnected",
+        "tooltip-format-wifi": "Signal Strength: {signalStrength}%",
+        "on-click": "~/.config/waybar/scripts/wifi-menu.sh"
+    },
+    "bluetooth": {
+        "format": "  {status}",
+        "format-disabled": "",
+        "format-connected": "  {num_connections}",
+        "tooltip-format": "{controller_alias}\t{controller_address}",
+        "tooltip-format-connected": "{controller_alias}\t{controller_address}\n\n{device_enumerate}",
+        "tooltip-format-enumerate-connected": "{device_alias}\t{device_address}",
+        "on-click": "blueman-manager"
+    },
+    "battery": {
+        "states": {
+            "warning": 30,
+            "critical": 15
+        },
+        "format": "{icon} {capacity}%",
+        "format-charging": " {capacity}%",
+        "format-plugged": " {capacity}%",
+        "format-full": " {capacity}%",
+        "format-icons": ["", "", "", "", ""],
+        "tooltip-format": "{timeTo}\n{power:.1f}W"
+    },
+    "custom/notification": {
+        "tooltip": true,
+        "format": "{icon}",
+        "format-icons": {
+            "notification": "",
+            "none": "",
+            "dnd-notification": "",
+            "dnd-none": "",
+            "inhibited-notification": "",
+            "inhibited-none": "",
+            "dnd-inhibited-notification": "",
+            "dnd-inhibited-none": ""
+        },
+        "return-type": "json",
+        "exec-if": "which swaync-client",
+        "exec": "swaync-client -swb",
+        "on-click": "swaync-client -t -sw",
+        "on-click-right": "swaync-client -d -sw",
+        "escape": true
+    },
+    "tray": {
+        "icon-size": 18,
+        "spacing": 10
+    },
+    "custom/weather": {
+        "format": "{}",
+        "exec": "~/.config/waybar/scripts/weather.sh",
+        "return-type": "json",
+        "interval": 900,
+        "tooltip": true
+    },
+    "custom/moon": {
+        "format": "{}",
+        "exec": "~/.config/waybar/scripts/moon.sh",
+        "return-type": "json",
+        "interval": 3600,
+        "tooltip": true
+    },
+    "custom/location": {
+        "format": "{}",
+        "exec": "~/.config/waybar/scripts/location-toggle.sh",
+        "return-type": "json",
+        "interval": 30,
+        "signal": 10,
+        "on-click": "~/.config/waybar/scripts/location-toggle.sh toggle"
+    },
+    "custom/screenshot": {
+        "tooltip": true,
+        "tooltip-format": "Screenshot (area select)",
+        "format": "",
+        "on-click": "~/.config/waybar/scripts/screenshot.sh"
+    },
+    "custom/power": {
+        "tooltip": false,
+        "on-click": "pkill rofi || bash ~/.config/rofi/powermenu/type-4/powermenu.sh",
+        "format": "\u23fb"
+    }
+}
