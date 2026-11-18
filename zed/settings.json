@@ -1,0 +1,24 @@
+// Zed settings: synced via github.com/Rupesh-ark/dotfiles (zed/).
+// Defaults are documented at https://zed.dev/docs/configuring-zed
+{
+  // AI agent: same model as before the 2026-11-18 reset.
+  "agent": {
+    "default_profile": "ask",
+    "default_model": {
+      "provider": "openai-subscribed",
+      "model": "gpt-5.6-sol",
+      "enable_thinking": true,
+      "effort": "max"
+    }
+  },
+
+  // Remote development: the devbox container on home-cortex, over Tailscale.
+  // Open it with "projects: open remote" (or the remote-projects button in the title bar).
+  "ssh_connections": [
+    {
+      "host": "devbox",
+      "username": "rupesh",
+      "projects": []
+    }
+  ]
+}

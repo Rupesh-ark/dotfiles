@@ -13,6 +13,7 @@ Portable Linux desktop environment configuration.
 | Swww / Awww | Wallpaper daemon |
 | Swaync | Notification daemon |
 | Thunar | File manager |
+| Zed | Editor (AI agent model + remote dev box over SSH) |
 
 ## Quick Start
 
